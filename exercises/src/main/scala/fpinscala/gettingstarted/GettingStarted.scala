@@ -134,25 +134,26 @@ object PolymorphicFunctions:
     loop(0)
 
 
+  val a = List(2)
   // Polymorphic functions are often so constrained by their type
   // that they only have one implementation! Here's an example:
 
   def partial1[A,B,C](a: A, f: (A,B) => C): B => C =
-    (b: B) => f(a, b)
+    b => f(a, b)
 
   // Exercise 3: Implement `curry`.
 
   // Note that `=>` associates to the right, so we could
   // write the return type as `A => B => C`
   def curry[A,B,C](f: (A, B) => C): A => (B => C) =
-    (a:A) => (b:B) => f(a,b)
+    a => b => f(a,b)
 
 
   // NB: The `Function2` trait has a `curried` method already
 
   // Exercise 4: Implement `uncurry`
   def uncurry[A,B,C](f: A => B => C): (A, B) => C =
-    (a:A,b:B) => f(a)(b)
+    (a,b) => f(a)(b)
 
   /*
   NB: There is a method on the `Function` object in the standard library,
